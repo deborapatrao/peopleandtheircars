@@ -94,6 +94,31 @@ const people = [
   ]
   
 
-  const typeDefs = `#graphql
-    type 
+  const typeDefs = gql`
+    type Person{
+      id: String!
+      firstName: String
+      lastName: String
+    }
+
+    type Car {
+      id: String!
+      year: Int
+      make: String
+      model: String
+      price: Float
+      personId: String
+    }
+
+    type Query {
+      person: [Person]
+    }
   `
+
+  const resolvers = {
+    Query: {
+      person: () => people
+    }
+  }
+
+  export{ typeDefs, resolvers }

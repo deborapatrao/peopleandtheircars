@@ -6,7 +6,7 @@
   "author": "Debora Correia",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon ./server.js --exec babl-node -e js",
+    "start": "nodemon ./server.js --exec babel-node -e js",
     "test": "echo \"Error no test specified\" && exit 1"
   },
   "dependencies": {
