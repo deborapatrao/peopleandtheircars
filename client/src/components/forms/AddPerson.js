@@ -11,16 +11,20 @@ const AddPerson = () => {
         forceUpdate([])
     }, [])
 
+    const onFinish = values => {}
+
     return(
         <Form
         name='add-person-form'
         form={form}
         layout='inline'
+        onFinish={onFinish}
         size='large'
         style={{marginBottom:'40px'}}
         >
             <Form.Item 
             name='firstName'
+            label={'First Name: '}
             rules={[{required: true, message: 'Please input first name' }]}>
                 <Input 
                 placeholder='First Name'/>
@@ -28,6 +32,7 @@ const AddPerson = () => {
 
             <Form.Item 
             name='lastName'
+            label={'Last Name: '}
             rules={[{required: true, message: 'Please input last name' }]}>
                 <Input 
                 placeholder='Last Name'/>
