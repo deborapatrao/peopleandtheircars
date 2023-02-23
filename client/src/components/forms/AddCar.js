@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
-import { Button, Form, Input, InputNumber, Select } from 'antd'
+import { Button, Form, Input, InputNumber, Select, Divider, Typography } from 'antd'
 
 const AddCar = () => {
     const [id] = useState(uuidv4())
@@ -22,6 +22,11 @@ const AddCar = () => {
         size='large'
         style={{marginBottom:'40px'}}
         >
+
+            <Divider>
+                <Typography.Title level={2}>Add Car</Typography.Title>
+            </Divider>
+
             <Form.Item 
             name='year'
             label={'Year: '}

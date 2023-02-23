@@ -118,7 +118,7 @@ const people = [
     }
 
     type Mutation{
-      addPerson(id: String!, firstName: String!, lastname:String!): Person
+      addPerson(id: String!, firstName: String!, lastName:String!): Person
       addCar(id: String!, year: Int!, make: String!, model: String!, price: Float!, personId: String!): Car
 
       updatePerson(id:String!, firstName: String, lastName: String): Person
