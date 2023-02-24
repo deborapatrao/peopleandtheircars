@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
-import { ADD_CAR, GET_PEOPLE } from '../../queries'
+import {gql} from '@apollo/client'
+import { ADD_CAR, GET_PEOPLE, GET_CARS, GET_ALL_CARS } from '../../queries'
 import { useQuery } from "@apollo/client"
 import { v4 as uuidv4 } from 'uuid'
 import { Button, Form, Input, InputNumber, Select, Divider, Typography } from 'antd'
@@ -7,12 +8,15 @@ import { useMutation } from '@apollo/client'
 
 
 const AddCar = () => {
-    const [id] = useState(uuidv4())
+    const [id, setId] = useState(uuidv4())
     const [addCar] = useMutation(ADD_CAR)
     const [form] = Form.useForm()
     const[, forceUpdate] = useState()
 
     const {data} = useQuery(GET_PEOPLE)
+
+    const {skd} = useQuery(GET_ALL_CARS)
+    console.log('test', skd)
 
     useEffect(() => {
         forceUpdate([])
@@ -20,8 +24,7 @@ const AddCar = () => {
 
     const onFinish = values => {
         const { year, make, model, price, personId } = values
-        
-        console.log('values: ', values)
+
         addCar({
             variables:{
                 id,
@@ -30,8 +33,23 @@ const AddCar = () => {
                 model,
                 price,
                 personId 
+            },
+            update: (cache, {data: {addCar}}) => {
+                const carData = cache.readQuery({ query: GET_ALL_CARS });
+                console.log('data Cars: ', carData)
+
+                
+                cache.writeQuery({
+                    query: GET_ALL_CARS,
+                    data:{
+                        ...carData,
+                        cars: [...carData.allCars, addCar]
+                    }
+                })
             }
         })
+        form.resetFields()
+        setId(uuidv4())
     }
 
     return(

@@ -22,9 +22,11 @@ const Person = props => {
     const [editMode, setEditMode] = useState(false)
 // const styles = getStyles()
 
-// const {loading, error, data} = useQuery(GET_CARS)
-// if (loading) return 'Loading ...'
-// if (error) return `Error ${error.message}`
+const { loading, error, data} = useQuery(GET_CARS, { 
+    variables: {personId: props.id} })
+console.log('car data: ', data)
+if (loading) return 'Loading ...'
+if (error) return `Error ${error.message}`
 
 const handleButtonClick = () => {
     setEditMode(!editMode)
@@ -65,7 +67,13 @@ console.log('props: ', props)
                     <RemovePerson id={id} />
                 ]}
                 >
-                    <Car />
+                    {data.cars.map(({ id, year, make, model, price }) => <Car key={id} 
+                    id={id} 
+                    year={year}
+                    make={make}
+                    model={model}
+                    price={price} />)}
+                    
                 </Card>
             )}
         

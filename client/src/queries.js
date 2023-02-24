@@ -9,9 +9,21 @@ export const GET_PEOPLE = gql`
     }
 }`
 
-export const GET_CARS = gql`
+export const GET_ALL_CARS = gql`
 {
-    cars{
+    allCars{
+        id
+        year
+        make
+        model
+        price
+        personId
+    }
+}`
+
+export const GET_CARS = gql`
+query Cars($personId: String!){
+    cars(personId: $personId){
         id
         year
         make
