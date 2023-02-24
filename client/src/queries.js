@@ -30,6 +30,18 @@ mutation AddPerson($id: String!, $firstName: String!, $lastName: String!){
     }
 }`
 
+export const ADD_CAR = gql`
+mutation AddCar($id: String!, $year: Int!, $make: String!, $model: String!, $price: Float!, $personId: String!){
+    addCar(id: $id, year: $year, make: $make, model: $model, price: $price, personId: $personId){
+        id
+        year
+        make
+        model
+        price 
+        personId 
+    }
+}`
+
 export const UPDATE_PERSON = gql`
 mutation UpdatePerson($id: String!, $firstName: String!, $lastName: String!){
     updatePerson(id: $id, firstName: $firstName, lastName: $lastName){

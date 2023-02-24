@@ -17,8 +17,6 @@ const {loading, error, data} = useQuery(GET_PEOPLE)
 if (loading) return 'Loading ...'
 if (error) return `Error ${error.message}`
 
-console.log('people: ', data.people)
-
 return (
     <List
     grid={{gutter:20, column: 1}} style={styles.list}>

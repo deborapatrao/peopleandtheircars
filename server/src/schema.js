@@ -113,6 +113,7 @@ const people = [
 
     type Query {
       people: [Person]
+      allCars: [Car]
       cars(personId: String!): [Car]
     }
 
@@ -131,7 +132,7 @@ const people = [
   const resolvers = {
     Query: {
       people: () => people,
-      // cars: () => cars,
+      allCars: () => cars,
       cars: (root, args) => {
         //filter will get all the results, as opposed by find that will get only the first result
         return filter(cars, {personId: args.personId})
