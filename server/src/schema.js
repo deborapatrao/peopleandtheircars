@@ -114,6 +114,7 @@ const people = [
 
     type Query {
       people: [Person]
+      person(id: String!): [Person]
       allCars: [Car]
       cars(personId: String!): [Car]
     }
@@ -127,6 +128,7 @@ const people = [
 
       removePerson(id:String!): Person
       removeCar(id:String!): Car
+      clearCars(personId: String!): Car
     }
   `
 
@@ -138,6 +140,16 @@ const people = [
           return p
         })
         return person
+      },
+      person: (parent, args) => {
+        const person = find(people, { id: args.id })
+
+        return {
+          ...person,
+          cars: filter(cars, {personId: args.id})
+
+          // cars: cars.filter(car => car.personId === person.id)
+        }
       },
       allCars: () => cars,
       cars: (root, args) => {
@@ -219,6 +231,19 @@ const people = [
 
         return removedCar
       }, 
+
+      clearCars: (root, args) => {
+        const removedCars = filter(cars, {personId: args.personId})
+
+        removedCars.map((car) => {
+          remove(cars, p => {
+            return p.id === car.id
+          })
+        })
+        return removedCars
+      }
+
+
     }
   }
 

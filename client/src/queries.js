@@ -17,6 +17,23 @@ export const GET_PEOPLE = gql`
     }
 }`
 
+export const GET_PERSON = gql`
+query Person($id: String!){
+    person(id: $id){
+        id
+        firstName
+        lastName
+        cars {
+            id
+            year
+            make
+            model
+            price
+            personId
+        }
+    }
+}`
+
 export const GET_ALL_CARS = gql`
 {
     allCars{
@@ -95,6 +112,18 @@ mutation RemovePerson($id: String!){
 export const REMOVE_CAR = gql`
 mutation RemoveCar($id: String!){
     removeCar(id: $id){
+        id
+        year
+        make
+        model
+        price 
+        personId 
+    }
+}`
+
+export const CLEAR_CARS = gql`
+mutation ClearCars($personId: String!){
+    clearCars(personId: $personId){
         id
         year
         make

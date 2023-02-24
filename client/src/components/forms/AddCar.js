@@ -32,8 +32,6 @@ const AddCar = () => {
             },
             update: (cache, {data: {addCar}}) => {
                 const carData = cache.readQuery({ query: GET_CARS, variables:{personId: values.personId} });
-                console.log('data Cars: ', carData)
-
                 
                 cache.writeQuery({
                     query: GET_CARS, variables: {personId: values.personId},

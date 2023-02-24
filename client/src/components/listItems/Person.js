@@ -1,11 +1,12 @@
 import { useQuery } from "@apollo/client"
-import { Card } from "antd"
+import { Button, Card } from "antd"
 import {EditOutlined} from '@ant-design/icons'
 import { GET_CARS } from "../../queries"
 import Car from "./Car"
 import RemovePerson from "../buttons/RemovePerson"
 import { useState } from "react"
 import UpdatePerson from "../forms/UpdatePerson"
+import { Link } from "react-router-dom"
 
 // const getStyles = () => ({
 //     card: {
@@ -58,7 +59,7 @@ const updateStateVariable = (variable, value) => {
             :(
                 <Card 
                 //style={styles.card}
-                title={[firstName, " ", lastName]}
+                title={`${firstName} ${lastName}`}
                 actions={[
                     <EditOutlined key='edit' onClick={handleButtonClick} />,
                     <RemovePerson id={id} />
@@ -71,7 +72,8 @@ const updateStateVariable = (variable, value) => {
                     model={model}
                     price={price}
                     personId={personId}/>)}
-                    
+
+                    <Link to={`/person/${id}`}>Learn More</Link>
                 </Card>
             )}
         
