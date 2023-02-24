@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
-import {gql} from '@apollo/client'
-import { ADD_CAR, GET_PEOPLE, GET_CARS, GET_ALL_CARS } from '../../queries'
+import { ADD_CAR, GET_PEOPLE, GET_CARS } from '../../queries'
 import { useQuery } from "@apollo/client"
 import { v4 as uuidv4 } from 'uuid'
 import { Button, Form, Input, InputNumber, Select, Divider, Typography } from 'antd'
@@ -32,12 +31,12 @@ const AddCar = () => {
                 personId 
             },
             update: (cache, {data: {addCar}}) => {
-                const carData = cache.readQuery({ query: GET_ALL_CARS });
+                const carData = cache.readQuery({ query: GET_CARS, variables:{personId: values.personId} });
                 console.log('data Cars: ', carData)
 
                 
                 cache.writeQuery({
-                    query: GET_ALL_CARS,
+                    query: GET_CARS, variables: {personId: values.personId},
                     data:{
                         ...carData,
                         cars: [...carData.cars, addCar]

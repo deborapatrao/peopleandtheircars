@@ -100,6 +100,7 @@ const people = [
       id: String!
       firstName: String!
       lastName: String!
+      cars: [Car]
     }
 
     type Car {
@@ -131,7 +132,13 @@ const people = [
 
   const resolvers = {
     Query: {
-      people: () => people,
+      people: () => {
+        const person = people.map(p =>{
+          p.cars = cars.filter((car) => car.personId === p.id)
+          return p
+        })
+        return person
+      },
       allCars: () => cars,
       cars: (root, args) => {
         //filter will get all the results, as opposed by find that will get only the first result
