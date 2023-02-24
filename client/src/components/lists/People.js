@@ -5,8 +5,8 @@ import Person from "../listItems/Person"
 
 const getStyles = () => ({
     list:{
-        display: 'flex',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        width: '100%'
     }
 })
 
@@ -16,6 +16,8 @@ const styles = getStyles()
 const {loading, error, data} = useQuery(GET_PEOPLE)
 if (loading) return 'Loading ...'
 if (error) return `Error ${error.message}`
+
+console.log('people: ', data.people)
 
 return (
     <List
@@ -27,7 +29,7 @@ return (
 
         {data.people.map(({ id, firstName, lastName }) => (
             <List.Item key={id}>
-                <Person key={id} firstName={firstName} lastName={lastName} />
+                <Person key={id} id={id} firstName={firstName} lastName={lastName} />
             </List.Item>
         ))}
 

@@ -113,8 +113,7 @@ const people = [
 
     type Query {
       people: [Person]
-      cars: [Car]
-      car(personId: String!): [Car]
+      cars(personId: String!): [Car]
     }
 
     type Mutation{
@@ -132,8 +131,8 @@ const people = [
   const resolvers = {
     Query: {
       people: () => people,
-      cars: () => cars,
-      car: (root, args) => {
+      // cars: () => cars,
+      cars: (root, args) => {
         //filter will get all the results, as opposed by find that will get only the first result
         return filter(cars, {personId: args.personId})
       }
