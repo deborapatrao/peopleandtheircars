@@ -71,3 +71,15 @@ mutation RemovePerson($id: String!){
         lastName
     }
 }`
+
+export const REMOVE_CAR = gql`
+mutation RemoveCar($id: String!){
+    removeCar(id: $id){
+        id
+        year
+        make
+        model
+        price 
+        personId 
+    }
+}`

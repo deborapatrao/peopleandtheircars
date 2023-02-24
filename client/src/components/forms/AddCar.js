@@ -15,9 +15,6 @@ const AddCar = () => {
 
     const {data} = useQuery(GET_PEOPLE)
 
-    const {skd} = useQuery(GET_ALL_CARS)
-    console.log('test', skd)
-
     useEffect(() => {
         forceUpdate([])
     }, [])
@@ -43,7 +40,7 @@ const AddCar = () => {
                     query: GET_ALL_CARS,
                     data:{
                         ...carData,
-                        cars: [...carData.allCars, addCar]
+                        cars: [...carData.cars, addCar]
                     }
                 })
             }

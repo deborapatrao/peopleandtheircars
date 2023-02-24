@@ -24,7 +24,6 @@ const Person = props => {
 
 const { loading, error, data} = useQuery(GET_CARS, { 
     variables: {personId: props.id} })
-console.log('car data: ', data)
 if (loading) return 'Loading ...'
 if (error) return `Error ${error.message}`
 
@@ -47,8 +46,6 @@ const updateStateVariable = (variable, value) => {
     }
 }
 
-console.log('props: ', props)
-
     return(
         <div>
 
@@ -67,12 +64,13 @@ console.log('props: ', props)
                     <RemovePerson id={id} />
                 ]}
                 >
-                    {data.cars.map(({ id, year, make, model, price }) => <Car key={id} 
+                    {data.cars.map(({ id, year, make, model, price, personId }) => <Car key={id} 
                     id={id} 
                     year={year}
                     make={make}
                     model={model}
-                    price={price} />)}
+                    price={price}
+                    personId={personId}/>)}
                     
                 </Card>
             )}
